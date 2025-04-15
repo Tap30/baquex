@@ -30,11 +30,25 @@
     "jsx": "react-jsx",
 
     "paths": {
-      // Core package
-      "@tapsioss/client-socket-manager": [
-        "./packages/core/dist/esm",
-        "./packages/core/src"
+      // VTree package
+      "@tapsioss/baquex-vtree": [
+        "./packages/vtree/dist",
+        "./packages/vtree/src"
       ],
+      // Elements package
+      "@tapsioss/baquex-elements": [
+        "./packages/elements/dist",
+        "./packages/elements/src"
+      ],
+      // Core package
+      "@tapsioss/baquex": ["./packages/core/dist", "./packages/core/src"],
+      // CLI package
+      "@tapsioss/baquex-cli": ["./packages/cli/dist", "./packages/cli/src"],
+      // Distributor package
+      "@tapsioss/baquex-distributor": [
+        "./packages/distributor/dist",
+        "./packages/distributor/src"
+      ]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
