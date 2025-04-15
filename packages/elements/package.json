@@ -12,5 +12,8 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "dependencies": {
+    "@tapsioss/baquex-vtree": "*"
   }
 }
