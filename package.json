@@ -5,6 +5,7 @@
   "packageManager": "pnpm@9.15.0",
   "private": true,
   "scripts": {
+    "dev:playground": "pnpm --filter @repo/playground run dev",
     "test": "vitest",
     "lint": "wireit"
   },
@@ -49,7 +50,10 @@
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.6",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
     "flat-cache": "^6.1.8",
+    "globals": "^15.15.0",
     "globby": "^14.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.5.3",
