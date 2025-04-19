@@ -15,5 +15,8 @@
   },
   "dependencies": {
     "@tapsioss/baquex-vtree": "workspace:*"
+  },
+  "devDependencies": {
+    "@preact/signals-core": "^1.8.0"
   }
 }
