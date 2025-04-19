@@ -1,5 +1,5 @@
-import { VNode } from "../VNode.ts";
-import type { VTree } from "../VTree.ts";
+import { VNode } from "./VNode.ts";
+import type { VTree } from "./VTree.ts";
 
 export class RootNode extends VNode {
   private _tree: VTree;
