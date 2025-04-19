@@ -48,6 +48,11 @@
       "@tapsioss/baquex-distributor": [
         "./packages/distributor/dist",
         "./packages/distributor/src"
+      ],
+      // Runtime package
+      "@tapsioss/baquex-runtime": [
+        "./packages/runtime/dist",
+        "./packages/runtime/src"
       ]
     }
   },
