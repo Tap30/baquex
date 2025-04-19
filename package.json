@@ -6,6 +6,8 @@
   "private": true,
   "scripts": {
     "dev:playground": "pnpm --filter @repo/playground run dev",
+    "dev": "run-s build dev:playground",
+    "build": "wireit",
     "test": "vitest",
     "lint": "wireit"
   },
@@ -33,6 +35,98 @@
         "./eslint.config.js"
       ],
       "output": []
+    },
+    "build": {
+      "dependencies": [
+        "build:vtree",
+        "build:runtime",
+        "build:elements",
+        "build:distributor",
+        "build:core",
+        "build:cli"
+      ]
+    },
+    "build:vtree": {
+      "command": "pnpm --filter @tapsioss/baquex-vtree run build",
+      "clean": "if-file-deleted",
+      "files": [
+        "./packages/vtree/**/*.ts",
+        "./packages/vtree/tsconfig.build.json",
+        "!./packages/vtree/**/*.test.ts",
+        "!./packages/vtree/dist/**/*"
+      ],
+      "output": [
+        "./packages/vtree/dist/**/*"
+      ]
+    },
+    "build:runtime": {
+      "command": "pnpm --filter @tapsioss/baquex-runtime run build",
+      "clean": "if-file-deleted",
+      "files": [
+        "./packages/runtime/**/*.ts",
+        "./packages/runtime/tsconfig.build.json",
+        "!./packages/runtime/**/*.test.ts",
+        "!./packages/runtime/dist/**/*"
+      ],
+      "output": [
+        "./packages/runtime/dist/**/*"
+      ]
+    },
+    "build:elements": {
+      "command": "pnpm --filter @tapsioss/baquex-elements run build",
+      "clean": "if-file-deleted",
+      "files": [
+        "./packages/elements/**/*.ts",
+        "./packages/elements/tsconfig.build.json",
+        "!./packages/elements/**/*.test.ts",
+        "!./packages/elements/dist/**/*"
+      ],
+      "output": [
+        "./packages/elements/dist/**/*"
+      ],
+      "dependencies": [
+        "build:vtree",
+        "build:runtime"
+      ]
+    },
+    "build:distributor": {
+      "command": "pnpm --filter @tapsioss/baquex-distributor run build",
+      "clean": "if-file-deleted",
+      "files": [
+        "./packages/distributor/**/*.ts",
+        "./packages/distributor/tsconfig.build.json",
+        "!./packages/distributor/**/*.test.ts",
+        "!./packages/distributor/dist/**/*"
+      ],
+      "output": [
+        "./packages/distributor/dist/**/*"
+      ]
+    },
+    "build:core": {
+      "command": "pnpm --filter @tapsioss/baquex run build",
+      "clean": "if-file-deleted",
+      "files": [
+        "./packages/core/**/*.ts",
+        "./packages/core/tsconfig.build.json",
+        "!./packages/core/**/*.test.ts",
+        "!./packages/core/dist/**/*"
+      ],
+      "output": [
+        "./packages/core/dist/**/*"
+      ]
+    },
+    "build:cli": {
+      "command": "pnpm --filter @tapsioss/baquex-cli run build",
+      "clean": "if-file-deleted",
+      "files": [
+        "./packages/cli/**/*.ts",
+        "./packages/cli/tsconfig.build.json",
+        "!./packages/cli/**/*.test.ts",
+        "!./packages/cli/dist/**/*"
+      ],
+      "output": [
+        "./packages/cli/dist/**/*"
+      ]
     }
   },
   "devDependencies": {

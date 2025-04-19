@@ -12,5 +12,9 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "scripts": {
+    "prebuild": "shx rm -rf dist",
+    "build": "tsc --project ./tsconfig.build.json"
   }
 }

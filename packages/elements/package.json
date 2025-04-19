@@ -13,7 +13,12 @@
       "default": "./dist/index.js"
     }
   },
+  "scripts": {
+    "prebuild": "shx rm -rf dist",
+    "build": "tsc --project ./tsconfig.build.json"
+  },
   "dependencies": {
+    "@tapsioss/baquex-runtime": "workspace:*",
     "@tapsioss/baquex-vtree": "workspace:*"
   },
   "devDependencies": {
