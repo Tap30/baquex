@@ -1,18 +1,18 @@
 import { RootNode } from "./RootNode.ts";
 
 /**
- * Abstract base class representing a node in a virtual tree structure.
+ * A class representing a node in a virtual tree structure.
  * VNodes form the building blocks of a hierarchical tree, used for
  * representing UI elements or document structures.
  */
-export abstract class VNode {
+export class VNode {
   protected _children: VNode[] = [];
   protected _parent: VNode | null = null;
 
   /**
    * Constructor for VNode.
    *
-   * @param parent - The parent VNode of this node.  If not provided,
+   * @param parent - The parent VNode of this node. If not provided,
    * this node is assumed to be a root node (though not necessarily the
    * very top-level root, which is a RootNode).
    */
@@ -219,5 +219,110 @@ export abstract class VNode {
     pathSegments.push(`R-${currentNode.tree.id}`);
 
     return pathSegments.join("-");
+  }
+
+  /**
+   * Appends a child node to the end of this node's children.
+   *
+   * @param node
+   * The child node to append.
+   */
+  public appendChild(node: VNode): void {
+    if (!node) {
+      throw new Error("Child node cannot be null or undefined");
+    }
+
+    this._children.push(node);
+  }
+
+  /**
+   * Prepends a child node to the beginning of this node's children.
+   *
+   * @param node
+   * The child node to prepend.
+   */
+  public prependChild(node: VNode): void {
+    if (!node) {
+      throw new Error("Child node cannot be null or undefined");
+    }
+
+    this._children.splice(0, 0, node);
+  }
+
+  /**
+   * Inserts a node after this node in the virtual tree.
+   *
+   * @throws {Error}
+   *
+   * @param node
+   * The node to insert.
+   */
+  public insertAfter(node: VNode): void {
+    if (!node) {
+      throw new Error("Node to insert cannot be null or undefined.");
+    }
+
+    if (!this._parent) {
+      throw new Error("Node does not have a parent.");
+    }
+
+    const idx = this._parent.children.indexOf(this);
+
+    if (idx === -1) {
+      throw new Error("Node not found in parent's children.");
+    }
+
+    this._parent.children.splice(idx + 1, 0, node);
+  }
+
+  /**
+   * Inserts a node before this node in the virtual tree.
+   *
+   * @throws {Error}
+   *
+   * @param node
+   * The node to insert.
+   */
+  public insertBefore(node: VNode): void {
+    if (!node) {
+      throw new Error("Node to insert cannot be null or undefined.");
+    }
+
+    const prev = this.prevSibling;
+
+    if (!prev) {
+      // Node is the first child of its parent.
+      if (!this._parent) {
+        throw new Error("Node does not have a parent.");
+      }
+
+      this.prependChild(node);
+
+      return;
+    }
+
+    this.insertAfter(node);
+  }
+
+  /**
+   * Deletes a child node from this node's children.
+   *
+   * @throws {Error}
+   *
+   * @param node
+   * The node to delete.
+   */
+  public deleteChild(node: VNode): void {
+    if (!node) {
+      throw new Error("Node to delete cannot be null or undefined.");
+    }
+
+    const idx = this._children.indexOf(node);
+
+    if (idx === -1) {
+      throw new Error("Node not found in parent's children.");
+    }
+
+    this._children.splice(idx, 1);
   }
 }
