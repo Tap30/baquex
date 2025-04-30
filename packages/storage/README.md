@@ -1,13 +1,13 @@
 <div align="center">
 
-# `@tapsioss/baquex-elements`
+# `@tapsioss/baquex-storage`
 
 </div>
 
 <div align="center">
 
-The elements module in the Baquex system provides control over the application's
-user interface elements.
+The storage module in the Baquex system manages the application's persisted
+storage, ensuring data persistence across individual runtime instances.
 
 </div>
 

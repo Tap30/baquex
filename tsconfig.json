@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "skipLibCheck": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
 
@@ -32,27 +32,45 @@
     "paths": {
       // VTree package
       "@tapsioss/baquex-vtree": [
-        "./packages/vtree/dist",
-        "./packages/vtree/src"
+        "./packages/vtree/src",
+        "./packages/vtree/dist/esm",
+        "./packages/vtree/dist/cjs"
       ],
       // Elements package
       "@tapsioss/baquex-elements": [
-        "./packages/elements/dist",
-        "./packages/elements/src"
+        "./packages/elements/src",
+        "./packages/elements/dist/esm",
+        "./packages/elements/dist/cjs"
       ],
       // Core package
-      "@tapsioss/baquex": ["./packages/core/dist", "./packages/core/src"],
+      "@tapsioss/baquex": [
+        "./packages/core/src",
+        "./packages/core/dist/esm",
+        "./packages/core/dist/cjs"
+      ],
       // CLI package
-      "@tapsioss/baquex-cli": ["./packages/cli/dist", "./packages/cli/src"],
+      "@tapsioss/baquex-cli": [
+        "./packages/cli/src",
+        "./packages/cli/dist/esm",
+        "./packages/cli/dist/cjs"
+      ],
       // Distributor package
       "@tapsioss/baquex-distributor": [
-        "./packages/distributor/dist",
-        "./packages/distributor/src"
+        "./packages/distributor/src",
+        "./packages/distributor/dist/esm",
+        "./packages/distributor/dist/cjs"
       ],
       // Runtime package
       "@tapsioss/baquex-runtime": [
-        "./packages/runtime/dist",
-        "./packages/runtime/src"
+        "./packages/runtime/src",
+        "./packages/runtime/dist/esm",
+        "./packages/runtime/dist/cjs"
+      ],
+      // Storage package
+      "@tapsioss/baquex-storage": [
+        "./packages/storage/src",
+        "./packages/storage/dist/esm",
+        "./packages/storage/dist/cjs"
       ]
     }
   },

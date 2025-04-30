@@ -1,20 +1,29 @@
 {
   "name": "@tapsioss/baquex-vtree",
   "version": "0.1.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tap30/baquex.git",
+    "directory": "packages/vtree"
+  },
   "files": [
-    "./dist"
+    "./dist",
+    "./README.md"
   ],
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/cjs/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
     }
   },
   "scripts": {
     "prebuild": "shx rm -rf dist",
-    "build": "tsc --project ./tsconfig.build.json"
+    "build:cjs": "tsc --project ./tsconfig.cjs.json",
+    "build:esm": "tsc --project ./tsconfig.esm.json",
+    "build": "run-p build:*"
   }
 }

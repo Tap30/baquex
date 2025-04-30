@@ -1,8 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "ES2018",
-    "outDir": "dist",
+    "target": "ES2017",
+    "module": "ES2020",
     "noEmit": false,
     "declaration": true,
     "incremental": true,

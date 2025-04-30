@@ -1,10 +1,10 @@
 {
-  "name": "@tapsioss/baquex-distributor",
+  "name": "@tapsioss/baquex-storage",
   "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Tap30/baquex.git",
-    "directory": "packages/distributor"
+    "directory": "packages/storage"
   },
   "files": [
     "./dist",

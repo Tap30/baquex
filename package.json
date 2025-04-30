@@ -39,6 +39,7 @@
     "build": {
       "dependencies": [
         "build:vtree",
+        "build:storage",
         "build:runtime",
         "build:elements",
         "build:distributor",
@@ -51,7 +52,8 @@
       "clean": "if-file-deleted",
       "files": [
         "./packages/vtree/**/*.ts",
-        "./packages/vtree/tsconfig.build.json",
+        "./packages/vtree/scripts/*.ts",
+        "./packages/vtree/tsconfig.{build,cjs,esm}.json",
         "!./packages/vtree/**/*.test.ts",
         "!./packages/vtree/dist/**/*"
       ],
@@ -59,12 +61,27 @@
         "./packages/vtree/dist/**/*"
       ]
     },
+    "build:storage": {
+      "command": "pnpm --filter @tapsioss/baquex-storage run build",
+      "clean": "if-file-deleted",
+      "files": [
+        "./packages/storage/**/*.ts",
+        "./packages/storage/scripts/*.ts",
+        "./packages/storage/tsconfig.{build,cjs,esm}.json",
+        "!./packages/storage/**/*.test.ts",
+        "!./packages/storage/dist/**/*"
+      ],
+      "output": [
+        "./packages/storage/dist/**/*"
+      ]
+    },
     "build:runtime": {
       "command": "pnpm --filter @tapsioss/baquex-runtime run build",
       "clean": "if-file-deleted",
       "files": [
         "./packages/runtime/**/*.ts",
-        "./packages/runtime/tsconfig.build.json",
+        "./packages/runtime/scripts/*.ts",
+        "./packages/runtime/tsconfig.{build,cjs,esm}.json",
         "!./packages/runtime/**/*.test.ts",
         "!./packages/runtime/dist/**/*"
       ],
@@ -77,7 +94,8 @@
       "clean": "if-file-deleted",
       "files": [
         "./packages/elements/**/*.ts",
-        "./packages/elements/tsconfig.build.json",
+        "./packages/elements/scripts/*.ts",
+        "./packages/elements/tsconfig.{build,cjs,esm}.json",
         "!./packages/elements/**/*.test.ts",
         "!./packages/elements/dist/**/*"
       ],
@@ -94,7 +112,8 @@
       "clean": "if-file-deleted",
       "files": [
         "./packages/distributor/**/*.ts",
-        "./packages/distributor/tsconfig.build.json",
+        "./packages/distributor/scripts/*.ts",
+        "./packages/distributor/tsconfig.{build,cjs,esm}.json",
         "!./packages/distributor/**/*.test.ts",
         "!./packages/distributor/dist/**/*"
       ],
@@ -107,7 +126,8 @@
       "clean": "if-file-deleted",
       "files": [
         "./packages/core/**/*.ts",
-        "./packages/core/tsconfig.build.json",
+        "./packages/core/scripts/*.ts",
+        "./packages/core/tsconfig.{build,cjs,esm}.json",
         "!./packages/core/**/*.test.ts",
         "!./packages/core/dist/**/*"
       ],
@@ -120,7 +140,8 @@
       "clean": "if-file-deleted",
       "files": [
         "./packages/cli/**/*.ts",
-        "./packages/cli/tsconfig.build.json",
+        "./packages/cli/scripts/*.ts",
+        "./packages/cli/tsconfig.{build,cjs,esm}.json",
         "!./packages/cli/**/*.test.ts",
         "!./packages/cli/dist/**/*"
       ],
