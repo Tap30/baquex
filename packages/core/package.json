@@ -25,5 +25,12 @@
     "build:cjs": "tsc --project ./tsconfig.cjs.json",
     "build:esm": "tsc --project ./tsconfig.esm.json",
     "build": "run-p build:*"
+  },
+  "dependencies": {
+    "@tapsioss/baquex-distributor": "workspace:*",
+    "@tapsioss/baquex-elements": "workspace:*",
+    "@tapsioss/baquex-runtime": "workspace:*",
+    "@tapsioss/baquex-storage": "workspace:*",
+    "@tapsioss/baquex-vtree": "workspace:*"
   }
 }
