@@ -1,0 +1,7 @@
+{
+  "name": "@repo/utils",
+  "main": "src/index.ts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module"
+}

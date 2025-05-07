@@ -25,5 +25,8 @@
     "build:cjs": "tsc --project ./tsconfig.cjs.json",
     "build:esm": "tsc --project ./tsconfig.esm.json",
     "build": "run-p build:*"
+  },
+  "dependencies": {
+    "@repo/utils": "workspace:*"
   }
 }

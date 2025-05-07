@@ -1,4 +1,4 @@
-import { DoubleEndedQueue } from "./DoubleEndedQueue.ts";
+import { DoubleEndedQueue } from "@repo/utils";
 import { RootNode } from "./RootNode.ts";
 import { type VNode } from "./VNode.ts";
 
@@ -25,14 +25,14 @@ export class VTree<N extends VNode = VNode> {
   /**
    * Gets the root node of the virtual tree.
    */
-  public get root() {
+  public get root(): RootNode<N> {
     return this._root;
   }
 
   /**
    * Gets the unique identifier of the virtual tree.
    */
-  public get id() {
+  public get id(): string {
     return this._id;
   }
 
