@@ -1,6 +1,6 @@
 import { effect, signal, type Signal } from "@preact/signals-core";
 import { VNode } from "@tapsioss/baquex-vtree";
-import type { Defined } from "./utils/types";
+import type { Defined } from "./utils/types.ts";
 
 export type StaticProps<
   Props extends Record<PropertyKey, unknown>,
@@ -47,6 +47,8 @@ const createProps = <
         );
       },
       set(v: Props[ReactiveKeys]) {
+        if (reactiveProps[k].peek() === v) return;
+
         reactiveProps[k].value = v;
       },
     });
@@ -95,7 +97,7 @@ export abstract class BaquexElement<
   public watch<K extends ReactiveKeys>(
     key: K,
     callback: (value: Defined<Props[K]>) => void,
-  ) {
+  ): void {
     effect(() => {
       callback(this[key as keyof typeof this] as unknown as Defined<Props[K]>);
     });

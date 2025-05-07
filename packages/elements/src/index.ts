@@ -34,3 +34,6 @@ export * from "./input/IconButton.ts";
 // export { Menu } from "./navigation/Menu.ts";
 // export { Pagination } from "./navigation/Pagination.ts";
 // export { TabGroup } from "./navigation/TabGroup.ts";
+
+export { BaquexElement } from "./BaquexElement.ts";
+export { runtimeManager } from "./runtime.ts";

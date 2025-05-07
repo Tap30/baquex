@@ -27,6 +27,7 @@
     "build": "run-p build:*"
   },
   "dependencies": {
+    "@repo/utils": "workspace:*",
     "@tapsioss/baquex-runtime": "workspace:*",
     "@tapsioss/baquex-vtree": "workspace:*"
   },
