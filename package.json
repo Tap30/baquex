@@ -11,7 +11,7 @@
     "clear:all": "run-p clear:cache clear:node-modules clear:dist",
     "dev:playground": "pnpm --filter @repo/playground run dev",
     "dev": "pnpm dev:playground",
-    "gen:tarball": "pnpm -r --parallel --filter=@tapsioss/* run gen:tarball",
+    "gen:tarball": "wireit",
     "build": "wireit",
     "test": "vitest",
     "format:check": "wireit",
@@ -61,6 +61,15 @@
       ],
       "output": []
     },
+    "gen:tarball": {
+      "command": "pnpm -r --parallel --filter=@tapsioss/* run gen:tarball",
+      "output": [
+        "./packages/**/*.tgz"
+      ],
+      "dependencies": [
+        "build"
+      ]
+    },
     "build": {
       "dependencies": [
         "build:vtree",
@@ -78,6 +87,7 @@
       "files": [
         "./packages/vtree/**/*.ts",
         "./packages/vtree/scripts/*.ts",
+        "./packages/vtree/package.json",
         "./packages/vtree/tsconfig.{build,cjs,esm}.json",
         "!./packages/vtree/**/*.test.ts",
         "!./packages/vtree/dist/**/*"
@@ -92,6 +102,7 @@
       "files": [
         "./packages/storage/**/*.ts",
         "./packages/storage/scripts/*.ts",
+        "./packages/storage/package.json",
         "./packages/storage/tsconfig.{build,cjs,esm}.json",
         "!./packages/storage/**/*.test.ts",
         "!./packages/storage/dist/**/*"
@@ -106,6 +117,7 @@
       "files": [
         "./packages/runtime/**/*.ts",
         "./packages/runtime/scripts/*.ts",
+        "./packages/runtime/package.json",
         "./packages/runtime/tsconfig.{build,cjs,esm}.json",
         "!./packages/runtime/**/*.test.ts",
         "!./packages/runtime/dist/**/*"
@@ -120,6 +132,7 @@
       "files": [
         "./packages/elements/**/*.ts",
         "./packages/elements/scripts/*.ts",
+        "./packages/elements/package.json",
         "./packages/elements/tsconfig.{build,cjs,esm}.json",
         "!./packages/elements/**/*.test.ts",
         "!./packages/elements/dist/**/*"
@@ -138,6 +151,7 @@
       "files": [
         "./packages/distributor/**/*.ts",
         "./packages/distributor/scripts/*.ts",
+        "./packages/distributor/package.json",
         "./packages/distributor/tsconfig.{build,cjs,esm}.json",
         "!./packages/distributor/**/*.test.ts",
         "!./packages/distributor/dist/**/*"
@@ -152,6 +166,7 @@
       "files": [
         "./packages/core/**/*.ts",
         "./packages/core/scripts/*.ts",
+        "./packages/core/package.json",
         "./packages/core/tsconfig.{build,cjs,esm}.json",
         "!./packages/core/**/*.test.ts",
         "!./packages/core/dist/**/*"
@@ -166,6 +181,7 @@
       "files": [
         "./packages/cli/**/*.ts",
         "./packages/cli/scripts/*.ts",
+        "./packages/cli/package.json",
         "./packages/cli/tsconfig.{build,cjs,esm}.json",
         "!./packages/cli/**/*.test.ts",
         "!./packages/cli/dist/**/*"
