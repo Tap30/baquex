@@ -131,7 +131,23 @@ importers:
 
   packages/cli: {}
 
-  packages/core: {}
+  packages/core:
+    dependencies:
+      '@tapsioss/baquex-distributor':
+        specifier: workspace:*
+        version: link:../distributor
+      '@tapsioss/baquex-elements':
+        specifier: workspace:*
+        version: link:../elements
+      '@tapsioss/baquex-runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@tapsioss/baquex-storage':
+        specifier: workspace:*
+        version: link:../storage
+      '@tapsioss/baquex-vtree':
+        specifier: workspace:*
+        version: link:../vtree
 
   packages/distributor: {}
 
