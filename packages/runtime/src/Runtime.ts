@@ -1,3 +1,4 @@
+import { VTree } from "@tapsioss/baquex-vtree";
 import { globalScope } from "./constants/global.ts";
 
 /**
@@ -5,6 +6,11 @@ import { globalScope } from "./constants/global.ts";
  * This ensures that only one runtime instance can exist per environment.
  */
 export const RUNTIME_SCOPE = Symbol("baquex.scope:runtime");
+
+/**
+ * Type for event handlers used in the runtime.
+ */
+export type EventHandler<T = unknown> = (event: T) => void;
 
 /**
  * Abstract base class for defining a runtime environment.
@@ -16,6 +22,8 @@ export const RUNTIME_SCOPE = Symbol("baquex.scope:runtime");
  * @abstract
  */
 export abstract class Runtime {
+  protected _tree: VTree;
+
   /**
    * Constructor for the Runtime class.
    *
@@ -33,6 +41,45 @@ export abstract class Runtime {
       );
     }
 
+    this._tree = new VTree("__baquex__runtime-tree__");
+
     globalScope[RUNTIME_SCOPE] = {};
   }
+
+  /**
+   * Triggers an event in the runtime.
+   *
+   * @param target target element.
+   * @param eventType The type of event to trigger.
+   */
+  public abstract triggerEvent<Target, EventType extends string>(
+    target: Target,
+    eventType: EventType,
+  ): Promise<void>;
+
+  /**
+   * Attaches an event handler to the runtime.
+   *
+   * @param target target element.
+   * @param eventType The type of event to attach the handler to.
+   * @param handler The event handler function.
+   */
+  public abstract attachEvent<
+    Target,
+    EventType extends string,
+    Handler extends EventHandler,
+  >(target: Target, eventType: EventType, handler: Handler): Promise<void>;
+
+  /**
+   * Detaches an event handler from the runtime.
+   *
+   * @param target target element.
+   * @param eventType The type of event to detach the handler from.
+   * @param handler The event handler function to detach.
+   */
+  public abstract detachEvent<
+    Target,
+    EventType extends string,
+    Handler extends EventHandler,
+  >(target: Target, eventType: EventType, handler: Handler): Promise<void>;
 }

@@ -1,1 +1,1 @@
-export { Runtime } from "./Runtime.ts";
+export * from "./Runtime.ts";
