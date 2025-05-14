@@ -11,6 +11,7 @@
     "clear:all": "run-p clear:cache clear:node-modules clear:dist",
     "dev:playground": "pnpm --filter @repo/playground run dev",
     "dev": "pnpm dev:playground",
+    "gen:tarball": "pnpm -r --parallel --filter=@tapsioss/* run gen:tarball",
     "build": "wireit",
     "test": "vitest",
     "format:check": "wireit",
