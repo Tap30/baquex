@@ -5,6 +5,7 @@ export class BrowserRuntime extends Runtime {
     target: unknown,
     eventType: string,
   ): Promise<void> {
+    console.log({ target, eventType });
     throw new Error("Method not implemented.");
   }
 
@@ -13,6 +14,7 @@ export class BrowserRuntime extends Runtime {
     eventType: string,
     handler: EventHandler,
   ): Promise<void> {
+    console.log({ target, eventType, handler });
     throw new Error("Method not implemented.");
   }
 
@@ -21,6 +23,7 @@ export class BrowserRuntime extends Runtime {
     eventType: string,
     handler: EventHandler,
   ): Promise<void> {
+    console.log({ target, eventType, handler });
     throw new Error("Method not implemented.");
   }
 }

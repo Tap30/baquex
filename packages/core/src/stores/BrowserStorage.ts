@@ -6,6 +6,7 @@ export class BrowserStorage<T> extends Storage<T> {
   }
 
   public override setValue(value: T): void {
+    console.log({ value });
     throw new Error("Method not implemented.");
   }
 
