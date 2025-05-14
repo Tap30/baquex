@@ -113,9 +113,6 @@ importers:
       '@tapsioss/baquex':
         specifier: workspace:*
         version: link:../../packages/core
-      '@tapsioss/baquex-elements':
-        specifier: workspace:*
-        version: link:../../packages/elements
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -167,7 +164,11 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0
 
-  packages/runtime: {}
+  packages/runtime:
+    dependencies:
+      '@tapsioss/baquex-vtree':
+        specifier: workspace:*
+        version: link:../vtree
 
   packages/storage: {}
 
