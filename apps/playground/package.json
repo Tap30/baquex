@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@tapsioss/baquex": "workspace:*",
-    "@tapsioss/baquex-elements": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

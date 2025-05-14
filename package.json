@@ -10,14 +10,14 @@
     "clear:cache": "tsx scripts/clear .wireit",
     "clear:all": "run-p clear:cache clear:node-modules clear:dist",
     "dev:playground": "pnpm --filter @repo/playground run dev",
-    "dev": "run-s build dev:playground",
+    "dev": "pnpm dev:playground",
     "build": "wireit",
     "test": "vitest",
     "format:check": "wireit",
     "format:write": "wireit",
     "lint:ts": "wireit",
     "lint:ecma": "wireit",
-    "lint": "run-p --race lint:ts lint:ecma format:check"
+    "lint": "run-p lint:ts lint:ecma format:check"
   },
   "wireit": {
     "format:check": {
