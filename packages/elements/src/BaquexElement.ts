@@ -1,5 +1,7 @@
 import { effect, signal, type Signal } from "@preact/signals-core";
+import type { EventHandler } from "@tapsioss/baquex-runtime";
 import { VNode } from "@tapsioss/baquex-vtree";
+import { runtimeManager } from "./runtime/manager.ts";
 import type { Defined } from "./utils/types.ts";
 
 export type StaticProps<
@@ -21,7 +23,7 @@ const createProps = <
   ReactiveKeys extends keyof Props,
   DefaultValues extends Partial<Props>,
 >(
-  cls: BaquexElement<Props, ReactiveKeys, DefaultValues>,
+  cls: ReactiveElement<Props, ReactiveKeys, DefaultValues>,
   initialProps: Props,
   reactiveKeys: Array<ReactiveKeys>,
   defaultValues: DefaultValues,
@@ -68,7 +70,7 @@ const createProps = <
   };
 };
 
-export abstract class BaquexElement<
+abstract class ReactiveElement<
   Props extends Record<PropertyKey, unknown>,
   ReactiveKeys extends keyof Props,
   DefaultValues extends Partial<Props>,
@@ -121,20 +123,49 @@ export abstract class BaquexElement<
   }
 }
 
-export type ReactiveBaquexElementClass<
+export abstract class BaquexElement<
   Props extends Record<PropertyKey, unknown>,
   ReactiveKeys extends keyof Props,
   DefaultValues extends Partial<Props>,
-  Element extends BaquexElement<Props, ReactiveKeys, DefaultValues>,
-> = new (initialProps: Props) => Element & {
-  [K in ReactiveKeys]-?: Props[K];
-};
+  EventMap extends Record<string, unknown>,
+> extends ReactiveElement<Props, ReactiveKeys, DefaultValues> {
+  public addEventListener<E extends keyof EventMap & string>(
+    eventType: E,
+    handler: EventHandler<EventMap[E]>,
+  ): void {
+    runtimeManager.attachEvent(this, eventType, handler);
+  }
 
-export type ReactiveBaquexElement<
+  public removeEventListener<E extends keyof EventMap & string>(
+    eventType: E,
+    handler: EventHandler<EventMap[E]>,
+  ): void {
+    runtimeManager.detachEvent(this, eventType, handler);
+  }
+
+  public dispatchEvent<E extends keyof EventMap & string>(eventType: E): void {
+    runtimeManager.triggerEvent(this, eventType);
+  }
+
+  public click(): void {
+    this.dispatchEvent("click");
+  }
+
+  public focus(): void {
+    this.dispatchEvent("focus");
+  }
+
+  public unfocus(): void {
+    this.dispatchEvent("unfocus");
+  }
+}
+
+export type BaquexElementKind<
   Props extends Record<PropertyKey, unknown>,
   ReactiveKeys extends keyof Props,
   DefaultValues extends Partial<Props>,
-  Element extends BaquexElement<Props, ReactiveKeys, DefaultValues>,
+  Element extends BaquexElement<Props, ReactiveKeys, DefaultValues, EventMap>,
+  EventMap extends Record<string, unknown>,
 > = Element & {
   [K in ReactiveKeys]-?: Props[K];
 };

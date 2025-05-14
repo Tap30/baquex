@@ -1,4 +1,5 @@
-import { BaquexElement, type ReactiveBaquexElement } from "../BaquexElement.ts";
+import { BaquexElement, type BaquexElementKind } from "../../BaquexElement.ts";
+import type { GlobalEventMap } from "../../runtime/events.ts";
 import type { ButtonProps } from "./Button.ts";
 
 export type IconButtonProps = Omit<
@@ -31,21 +32,25 @@ const DEFAULT_VALUES = {
 type ReactiveKeys = (typeof REACTIVE_KEYS)[number];
 type DefaultValues = typeof DEFAULT_VALUES;
 
+type EventMap = GlobalEventMap;
+
 export class IconButton extends BaquexElement<
   IconButtonProps,
   ReactiveKeys,
-  DefaultValues
+  DefaultValues,
+  EventMap
 > {
   constructor(initialProps: IconButtonProps) {
     super(initialProps, REACTIVE_KEYS, DEFAULT_VALUES);
   }
 }
 
-export type IconButtonElement = ReactiveBaquexElement<
+export type IconButtonElement = BaquexElementKind<
   IconButtonProps,
   ReactiveKeys,
   DefaultValues,
-  IconButton
+  IconButton,
+  EventMap
 >;
 
 export const createIconButton = (
