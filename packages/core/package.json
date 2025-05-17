@@ -44,6 +44,7 @@
     "@tapsioss/baquex-distributor": "workspace:*",
     "@tapsioss/baquex-elements": "workspace:*",
     "@tapsioss/baquex-runtime": "workspace:*",
-    "@tapsioss/baquex-vtree": "workspace:*"
+    "@tapsioss/baquex-vtree": "workspace:*",
+    "cosmiconfig": "^9.0.0"
   }
 }
