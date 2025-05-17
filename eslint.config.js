@@ -1,17 +1,12 @@
 import jsLint from "@eslint/js";
 import vitestPlugin from "@vitest/eslint-plugin";
 import commentsPlugin from "eslint-plugin-eslint-comments";
-import importPlugin from "eslint-plugin-import";
 import prettierRecommendedConfig from "eslint-plugin-prettier/recommended";
 import { config, configs as tsLintConfigs } from "typescript-eslint";
 
 export default config(
   jsLint.configs.recommended,
-  ...tsLintConfigs.recommendedTypeChecked,
-  /* eslint-disable @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access */
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
-  /* eslint-enable @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access */
+  tsLintConfigs.recommendedTypeChecked,
   prettierRecommendedConfig,
   {
     files: ["*.ts", "*.tsx"],
@@ -65,13 +60,6 @@ export default config(
       "no-unused-private-class-members": "warn",
       "no-promise-executor-return": "error",
       "no-unmodified-loop-condition": "warn",
-      "import/extensions": [
-        "error",
-        "always",
-        {
-          ignorePackages: true,
-        },
-      ],
       eqeqeq: ["error", "smart"],
       "no-duplicate-imports": [
         "error",
@@ -132,13 +120,6 @@ export default config(
           next: "*",
         },
       ],
-    },
-    settings: {
-      "import/resolver": {
-        typescript: {
-          project: "tsconfig.json",
-        },
-      },
     },
   },
 );
