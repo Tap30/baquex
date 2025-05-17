@@ -47,8 +47,7 @@
       "@tapsioss/baquex-distributor": ["./packages/distributor/src"],
       // Runtime package
       "@tapsioss/baquex-runtime": ["./packages/runtime/src"],
-      // Storage package
-      "@tapsioss/baquex-storage": ["./packages/storage/src"],
+      // Internal utils package
       "@repo/utils": ["./internals/utils/src"]
     }
   },

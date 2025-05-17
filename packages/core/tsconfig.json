@@ -10,8 +10,7 @@
     { "path": "../vtree" },
     { "path": "../runtime" },
     { "path": "../elements" },
-    { "path": "../distributor" },
-    { "path": "../storage" }
+    { "path": "../distributor" }
   ],
   "include": ["src"],
   "exclude": ["**/*.test.ts", "__tests__"]

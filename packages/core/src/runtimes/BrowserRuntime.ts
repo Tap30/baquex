@@ -5,6 +5,7 @@ export class BrowserRuntime extends Runtime {
     target: unknown,
     eventType: string,
   ): Promise<void> {
+    // eslint-disable-next-line no-console
     console.log({ target, eventType });
     throw new Error("Method not implemented.");
   }
@@ -14,6 +15,7 @@ export class BrowserRuntime extends Runtime {
     eventType: string,
     handler: EventHandler,
   ): Promise<void> {
+    // eslint-disable-next-line no-console
     console.log({ target, eventType, handler });
     throw new Error("Method not implemented.");
   }
@@ -23,6 +25,7 @@ export class BrowserRuntime extends Runtime {
     eventType: string,
     handler: EventHandler,
   ): Promise<void> {
+    // eslint-disable-next-line no-console
     console.log({ target, eventType, handler });
     throw new Error("Method not implemented.");
   }

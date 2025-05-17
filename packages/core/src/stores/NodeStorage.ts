@@ -1,4 +1,4 @@
-import { Storage } from "@tapsioss/baquex-storage";
+import { Storage } from "../Storage.ts";
 
 export class NodeStorage<T> extends Storage<T> {
   public override clear(): void {
@@ -6,6 +6,7 @@ export class NodeStorage<T> extends Storage<T> {
   }
 
   public override setValue(value: T): void {
+    // eslint-disable-next-line no-console
     console.log({ value });
     throw new Error("Method not implemented.");
   }
