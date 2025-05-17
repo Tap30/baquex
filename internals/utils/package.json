@@ -1,7 +1,35 @@
 {
   "name": "@repo/utils",
-  "main": "src/index.ts",
   "version": "0.0.0",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "prebuild": "shx rm -rf dist",
+    "gen:tarball": "pnpm pack",
+    "build": "wireit"
+  },
+  "wireit": {
+    "build": {
+      "command": "tsc -b tsconfig.json",
+      "clean": "if-file-deleted",
+      "files": [
+        "./{src,scripts}/**/*.{ts,tsx}",
+        "./package.json",
+        "./tsconfig.json",
+        "!*.test.{ts,tsx}",
+        "!./dist/**/*"
+      ],
+      "output": [
+        "./dist/**/*"
+      ]
+    }
+  }
 }

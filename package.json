@@ -6,13 +6,14 @@
   "private": true,
   "scripts": {
     "clear:dist": "tsx scripts/clear dist **/**/dist !node_modules/**/dist !.wireit/**/dist",
+    "clear:tarball": "tsx scripts/clear **/**/*.tgz",
     "clear:node-modules": "tsx scripts/clear node_modules **/**/node_modules !node_modules/**/node_modules !.wireit/**/node_modules",
-    "clear:cache": "tsx scripts/clear .wireit",
-    "clear:all": "run-p clear:cache clear:node-modules clear:dist",
+    "clear:wireit": "tsx scripts/clear **/**/.wireit !node_modules/**/.wireit",
+    "clear": "run-p clear:*",
     "dev:playground": "pnpm --filter @repo/playground run dev",
     "dev": "pnpm dev:playground",
     "gen:tarball": "wireit",
-    "build": "wireit",
+    "build": "pnpm -r --filter=!@repo/playground run build",
     "test": "vitest",
     "format:check": "wireit",
     "format:write": "wireit",
@@ -44,9 +45,10 @@
       "output": []
     },
     "lint:ts": {
-      "command": "tsc --project tsconfig.json",
+      "command": "tsc --project ./tsconfig.json",
       "files": [
         "./tsconfig.json",
+        "./tsconfig.tsbuildinfo",
         "**/*.{ts,tsx}",
         "!dist/**/*"
       ],
@@ -69,126 +71,6 @@
       "dependencies": [
         "build"
       ]
-    },
-    "build": {
-      "dependencies": [
-        "build:vtree",
-        "build:storage",
-        "build:runtime",
-        "build:elements",
-        "build:distributor",
-        "build:core",
-        "build:cli"
-      ]
-    },
-    "build:vtree": {
-      "command": "pnpm --filter @tapsioss/baquex-vtree run build",
-      "clean": "if-file-deleted",
-      "files": [
-        "./packages/vtree/**/*.ts",
-        "./packages/vtree/scripts/*.ts",
-        "./packages/vtree/package.json",
-        "./packages/vtree/tsconfig.{build,cjs,esm}.json",
-        "!./packages/vtree/**/*.test.ts",
-        "!./packages/vtree/dist/**/*"
-      ],
-      "output": [
-        "./packages/vtree/dist/**/*"
-      ]
-    },
-    "build:storage": {
-      "command": "pnpm --filter @tapsioss/baquex-storage run build",
-      "clean": "if-file-deleted",
-      "files": [
-        "./packages/storage/**/*.ts",
-        "./packages/storage/scripts/*.ts",
-        "./packages/storage/package.json",
-        "./packages/storage/tsconfig.{build,cjs,esm}.json",
-        "!./packages/storage/**/*.test.ts",
-        "!./packages/storage/dist/**/*"
-      ],
-      "output": [
-        "./packages/storage/dist/**/*"
-      ]
-    },
-    "build:runtime": {
-      "command": "pnpm --filter @tapsioss/baquex-runtime run build",
-      "clean": "if-file-deleted",
-      "files": [
-        "./packages/runtime/**/*.ts",
-        "./packages/runtime/scripts/*.ts",
-        "./packages/runtime/package.json",
-        "./packages/runtime/tsconfig.{build,cjs,esm}.json",
-        "!./packages/runtime/**/*.test.ts",
-        "!./packages/runtime/dist/**/*"
-      ],
-      "output": [
-        "./packages/runtime/dist/**/*"
-      ]
-    },
-    "build:elements": {
-      "command": "pnpm --filter @tapsioss/baquex-elements run build",
-      "clean": "if-file-deleted",
-      "files": [
-        "./packages/elements/**/*.ts",
-        "./packages/elements/scripts/*.ts",
-        "./packages/elements/package.json",
-        "./packages/elements/tsconfig.{build,cjs,esm}.json",
-        "!./packages/elements/**/*.test.ts",
-        "!./packages/elements/dist/**/*"
-      ],
-      "output": [
-        "./packages/elements/dist/**/*"
-      ],
-      "dependencies": [
-        "build:vtree",
-        "build:runtime"
-      ]
-    },
-    "build:distributor": {
-      "command": "pnpm --filter @tapsioss/baquex-distributor run build",
-      "clean": "if-file-deleted",
-      "files": [
-        "./packages/distributor/**/*.ts",
-        "./packages/distributor/scripts/*.ts",
-        "./packages/distributor/package.json",
-        "./packages/distributor/tsconfig.{build,cjs,esm}.json",
-        "!./packages/distributor/**/*.test.ts",
-        "!./packages/distributor/dist/**/*"
-      ],
-      "output": [
-        "./packages/distributor/dist/**/*"
-      ]
-    },
-    "build:core": {
-      "command": "pnpm --filter @tapsioss/baquex run build",
-      "clean": "if-file-deleted",
-      "files": [
-        "./packages/core/**/*.ts",
-        "./packages/core/scripts/*.ts",
-        "./packages/core/package.json",
-        "./packages/core/tsconfig.{build,cjs,esm}.json",
-        "!./packages/core/**/*.test.ts",
-        "!./packages/core/dist/**/*"
-      ],
-      "output": [
-        "./packages/core/dist/**/*"
-      ]
-    },
-    "build:cli": {
-      "command": "pnpm --filter @tapsioss/baquex-cli run build",
-      "clean": "if-file-deleted",
-      "files": [
-        "./packages/cli/**/*.ts",
-        "./packages/cli/scripts/*.ts",
-        "./packages/cli/package.json",
-        "./packages/cli/tsconfig.{build,cjs,esm}.json",
-        "!./packages/cli/**/*.test.ts",
-        "!./packages/cli/dist/**/*"
-      ],
-      "output": [
-        "./packages/cli/dist/**/*"
-      ]
     }
   },
   "devDependencies": {
@@ -203,12 +85,12 @@
     "@types/react-dom": "^19.1.3",
     "@vitejs/plugin-react": "^4.4.1",
     "@vitest/eslint-plugin": "^1.1.44",
+    "@repo/utils": "workspace:*",
     "del": "^8.0.0",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.10.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",

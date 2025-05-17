@@ -1,6 +1,7 @@
 {
   "name": "@tapsioss/baquex",
   "version": "0.1.0",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/Tap30/baquex.git",
@@ -10,23 +11,34 @@
     "./dist",
     "./README.md"
   ],
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/cjs/index.d.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.js",
   "exports": {
     ".": {
-      "development": "./src/index.ts",
-      "types": "./dist/cjs/index.d.ts",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
   "scripts": {
     "prebuild": "shx rm -rf dist",
-    "build:cjs": "tsc --project ./tsconfig.cjs.json",
-    "build:esm": "tsc --project ./tsconfig.esm.json",
     "gen:tarball": "pnpm pack",
-    "build": "run-p build:*"
+    "build": "wireit"
+  },
+  "wireit": {
+    "build": {
+      "command": "tsc -b tsconfig.json",
+      "clean": "if-file-deleted",
+      "files": [
+        "./{src,scripts}/**/*.{ts,tsx}",
+        "./package.json",
+        "./tsconfig.json",
+        "!*.test.{ts,tsx}",
+        "!./dist/**/*"
+      ],
+      "output": [
+        "./dist/**/*"
+      ]
+    }
   },
   "dependencies": {
     "@tapsioss/baquex-distributor": "workspace:*",

@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "target": "ES2017",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "skipLibCheck": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
 
@@ -14,8 +14,12 @@
     "allowJs": false,
     "checkJs": false,
 
+    "declaration": true,
+    "noEmitOnError": true,
     "strict": true,
     "pretty": true,
+    "incremental": true,
+    "composite": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -32,34 +36,20 @@
 
     "paths": {
       // VTree package
-      "@tapsioss/baquex-vtree": [
-        "./packages/vtree/src",
-        "./packages/vtree/dist/esm"
-      ],
+      "@tapsioss/baquex-vtree": ["./packages/vtree/src"],
       // Elements package
-      "@tapsioss/baquex-elements": [
-        "./packages/elements/src",
-        "./packages/elements/dist/esm"
-      ],
+      "@tapsioss/baquex-elements": ["./packages/elements/src"],
       // Core package
-      "@tapsioss/baquex": ["./packages/core/src", "./packages/core/dist/esm"],
+      "@tapsioss/baquex": ["./packages/core/src"],
       // CLI package
-      "@tapsioss/baquex-cli": ["./packages/cli/src", "./packages/cli/dist/esm"],
+      "@tapsioss/baquex-cli": ["./packages/cli/src"],
       // Distributor package
-      "@tapsioss/baquex-distributor": [
-        "./packages/distributor/src",
-        "./packages/distributor/dist/esm"
-      ],
+      "@tapsioss/baquex-distributor": ["./packages/distributor/src"],
       // Runtime package
-      "@tapsioss/baquex-runtime": [
-        "./packages/runtime/src",
-        "./packages/runtime/dist/esm"
-      ],
+      "@tapsioss/baquex-runtime": ["./packages/runtime/src"],
       // Storage package
-      "@tapsioss/baquex-storage": [
-        "./packages/storage/src",
-        "./packages/storage/dist/esm"
-      ]
+      "@tapsioss/baquex-storage": ["./packages/storage/src"],
+      "@repo/utils": ["./internals/utils/src"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo"
+  },
+  "references": [
+    { "path": "../vtree" },
+    { "path": "../runtime" },
+    { "path": "../elements" },
+    { "path": "../distributor" },
+    { "path": "../storage" }
+  ],
+  "include": ["src"],
+  "exclude": ["**/*.test.ts", "__tests__"]
+}
