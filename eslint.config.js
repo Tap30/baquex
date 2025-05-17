@@ -49,9 +49,14 @@ export default config(
     },
   },
   {
+    files: ["*", "!**/scripts/**/*"],
+    rules: {
+      "no-console": "warn",
+    },
+  },
+  {
     rules: {
       "no-alert": "error",
-      "no-console": "warn",
       "prefer-const": "error",
       "default-case": "error",
       "eol-last": "error",
