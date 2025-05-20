@@ -41,7 +41,6 @@
     }
   },
   "dependencies": {
-    "@tapsioss/baquex-distributor": "workspace:*",
     "@tapsioss/baquex-elements": "workspace:*",
     "@tapsioss/baquex-runtime": "workspace:*",
     "@tapsioss/baquex-vtree": "workspace:*",

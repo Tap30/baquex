@@ -126,13 +126,8 @@ importers:
 
   internals/utils: {}
 
-  packages/cli: {}
-
   packages/core:
     dependencies:
-      '@tapsioss/baquex-distributor':
-        specifier: workspace:*
-        version: link:../distributor
       '@tapsioss/baquex-elements':
         specifier: workspace:*
         version: link:../elements
@@ -155,8 +150,6 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.4.1
         version: 4.4.1(vite@6.3.5(@types/node@20.17.43)(tsx@4.19.4))
-
-  packages/distributor: {}
 
   packages/elements:
     dependencies:

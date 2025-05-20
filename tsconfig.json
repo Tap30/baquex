@@ -41,10 +41,6 @@
       "@tapsioss/baquex-elements": ["./packages/elements/src"],
       // Core package
       "@tapsioss/baquex": ["./packages/core/src"],
-      // CLI package
-      "@tapsioss/baquex-cli": ["./packages/cli/src"],
-      // Distributor package
-      "@tapsioss/baquex-distributor": ["./packages/distributor/src"],
       // Runtime package
       "@tapsioss/baquex-runtime": ["./packages/runtime/src"],
       // Internal utils package

@@ -9,8 +9,7 @@
   "references": [
     { "path": "../vtree" },
     { "path": "../runtime" },
-    { "path": "../elements" },
-    { "path": "../distributor" }
+    { "path": "../elements" }
   ],
   "include": ["src"],
   "exclude": ["**/*.test.ts", "__tests__"]
