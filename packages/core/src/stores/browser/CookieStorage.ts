@@ -1,6 +1,6 @@
 import { Storage } from "../Storage.ts";
 
-export class BrowserStorage<T> extends Storage<T> {
+export class CookieStorage<T> extends Storage<T> {
   public override clear(): void {
     throw new Error("Method not implemented.");
   }

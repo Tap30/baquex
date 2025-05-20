@@ -1,6 +1,6 @@
 import { Storage } from "../Storage.ts";
 
-export class NodeStorage<T> extends Storage<T> {
+export class SessionStorage<T> extends Storage<T> {
   public override clear(): void {
     throw new Error("Method not implemented.");
   }
