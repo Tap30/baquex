@@ -1,6 +1,5 @@
 import { cosmiconfig } from "cosmiconfig";
 import * as path from "node:path";
-import { cwd as resolveCwd } from "node:process";
 import { MODULE_NAME } from "../constants.ts";
 import type { Config } from "./types.ts";
 
@@ -23,11 +22,6 @@ export type LoadConfigResult = {
  */
 export type LoadConfigOptions = {
   /**
-   * The current working directory to start searching for the configuration file.
-   * Defaults to the process's current working directory if not provided.
-   */
-  cwd: string;
-  /**
    * An explicit path to the configuration file. If provided, the loader will
    * directly attempt to load this file, bypassing the search process.
    */
@@ -40,25 +34,16 @@ export type LoadConfigOptions = {
  * directory and its ancestors, or directly loads the file if a `configFilePath`
  * is provided.
  *
- * @param options - Optional parameters to control the loading process.
+ * @param cwd The current working directory to start searching for the configuration file. Defaults to the process's current working directory if not provided.
+ * @param options Optional parameters to control the loading process.
+ *
  * @throws {Error} If an error occurs during the configuration file resolution or loading process.
  */
 export const loadConfig = async (
+  cwd: string,
   options: Partial<LoadConfigOptions> = {},
 ): Promise<LoadConfigResult | null> => {
-  const { cwd: cwdOption, configFilePath: configFilePathOption } = options;
-
-  let cwd: string;
-
-  if (!cwdOption) {
-    cwd = resolveCwd();
-  } else {
-    cwd = cwdOption;
-
-    if (!path.isAbsolute(cwd)) {
-      cwd = path.resolve(resolveCwd(), cwd);
-    }
-  }
+  const { configFilePath: configFilePathOption } = options;
 
   const configFilePath = configFilePathOption
     ? path.resolve(cwd, configFilePathOption)

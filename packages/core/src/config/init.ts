@@ -1,48 +1,23 @@
 import * as fs from "fs/promises";
 import * as path from "node:path";
-import { cwd as resolveCwd } from "node:process";
 import { LIB_NAME, MODULE_NAME } from "../constants.ts";
 import type { Config } from "./types.ts";
-
-/**
- * Options for initializing the configuration file.
- */
-export type InitConfigOptions = {
-  /**
-   * The directory where the configuration file should be created.
-   * Defaults to the process's current working directory.
-   */
-  cwd: string;
-};
 
 /**
  * Asynchronously initializes a new configuration file with default content,
  * automatically determining the best format based on the project structure.
  *
- * @param defaultConfig - The initial configuration to write to the file.
- * @param options - Options for initializing the configuration file.
+ * @param cwd The directory where the configuration file should be created.
+ * Defaults to the process's current working directory.
+ * @param defaultConfig The initial configuration to write to the file.
  *
  * @throws {Error} If an error occurs during the file creation process or if the
  * target file already exists.
  */
 export const initConfig = async (
+  cwd: string,
   defaultConfig: Config,
-  options: Partial<InitConfigOptions> = {},
 ): Promise<void> => {
-  const { cwd: cwdOption } = options;
-
-  let cwd: string;
-
-  if (!cwdOption) {
-    cwd = resolveCwd();
-  } else {
-    cwd = cwdOption;
-
-    if (!path.isAbsolute(cwd)) {
-      cwd = path.resolve(resolveCwd(), cwd);
-    }
-  }
-
   let format: "js" | "cjs" | "mjs" | "ts" | "cts" | "mts" = "js";
   let isESM = false;
 
