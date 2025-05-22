@@ -11,6 +11,6 @@
     { "path": "../runtime" },
     { "path": "../elements" }
   ],
-  "include": ["src"],
+  "include": ["src", "src/app/app-payload.json"],
   "exclude": ["**/*.test.ts", "__tests__"]
 }
