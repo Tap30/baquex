@@ -20,10 +20,11 @@
     }
   },
   "bin": {
-    "baquex": "./dist/cli.js"
+    "baquex": "./dist/bin/cli.js"
   },
   "scripts": {
     "prebuild": "shx rm -rf dist",
+    "postbuild": "tsx scripts/move-files.ts",
     "gen:tarball": "pnpm pack",
     "build": "wireit"
   },
