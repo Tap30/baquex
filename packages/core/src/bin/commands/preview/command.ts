@@ -6,7 +6,7 @@ import { previewAction } from "./action.ts";
 const COMMAND_NAME = "preview";
 
 export const previewCommand: CliCommand = ctx => {
-  return createCommand(COMMAND_NAME)
+  const subcmd = createCommand(COMMAND_NAME)
     .description("Baquex application preview")
     .addHelpText(
       "after",
@@ -20,5 +20,7 @@ export const previewCommand: CliCommand = ctx => {
       `[boolean] exit if specified port is already in use`,
     )
     .option("--open [path]", `[boolean | string] open browser on startup`)
-    .action(() => runAction(COMMAND_NAME, previewAction)(ctx));
+    .action(() => runAction(COMMAND_NAME, previewAction)(ctx, subcmd));
+
+  return subcmd;
 };

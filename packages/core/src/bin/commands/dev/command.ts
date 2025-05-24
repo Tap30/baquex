@@ -6,7 +6,7 @@ import { devAction } from "./action.ts";
 const COMMAND_NAME = "dev";
 
 export const devCommand: CliCommand = ctx => {
-  return createCommand(COMMAND_NAME)
+  const subcmd = createCommand(COMMAND_NAME)
     .description("Baquex development server")
     .addHelpText("after", "\nStarts a development server for the application.")
     .option("-c, --config <file>", `[string] use specified config file`)
@@ -18,5 +18,7 @@ export const devCommand: CliCommand = ctx => {
       "--strictPort",
       `[boolean] exit if specified port is already in use`,
     )
-    .action(() => runAction(COMMAND_NAME, devAction)(ctx));
+    .action(() => runAction(COMMAND_NAME, devAction)(ctx, subcmd));
+
+  return subcmd;
 };

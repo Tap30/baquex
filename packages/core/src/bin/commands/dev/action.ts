@@ -1,12 +1,11 @@
 import { createServer, type InlineConfig } from "vite";
+import { DEFAULT_CONFIG } from "../../../config/constants.ts";
 import { resolveConfig } from "../../../utils/resolve-config.ts";
 import type { CliAction } from "../../types.ts";
-import { createAppPayload } from "../../utils/create-app-payload.ts";
-import { setupAppInput } from "../../utils/setup-app-input.ts";
 import { type DevCommandOptions } from "./types.ts";
 
-export const devAction: CliAction = async ctx => {
-  const { cwd, logger, cmd } = ctx;
+export const devAction: CliAction = async (ctx, subcmd) => {
+  const { cwd, logger } = ctx;
 
   const {
     config: configFile,
@@ -15,12 +14,12 @@ export const devAction: CliAction = async ctx => {
     port,
     strictPort,
     cors,
-  } = cmd.opts<DevCommandOptions>();
+  } = subcmd.opts<DevCommandOptions>();
 
   const { config } = await resolveConfig(cwd, configFile);
-  const { main, ...viteConfig } = config;
 
   const serverConfig: InlineConfig = {
+    ...DEFAULT_CONFIG,
     root: cwd,
     mode: "development",
     server: {
@@ -30,15 +29,11 @@ export const devAction: CliAction = async ctx => {
       cors,
       strictPort,
     },
-    ...viteConfig,
+    ...config,
   };
-
-  setupAppInput(serverConfig);
 
   try {
     const server = await createServer(serverConfig);
-
-    await createAppPayload({ main });
 
     if (!server.httpServer) {
       throw new Error("HTTP server not available");

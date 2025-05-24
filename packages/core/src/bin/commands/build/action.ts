@@ -1,29 +1,25 @@
 import { createBuilder, type InlineConfig } from "vite";
+import { DEFAULT_CONFIG } from "../../../config/constants.ts";
 import { resolveConfig } from "../../../utils/resolve-config.ts";
 import type { CliAction } from "../../types.ts";
-import { createAppPayload } from "../../utils/create-app-payload.ts";
-import { setupAppInput } from "../../utils/setup-app-input.ts";
 import { type BuildCommandOptions } from "./types.ts";
 
-export const buildAction: CliAction = async ctx => {
-  const { cwd, logger, cmd } = ctx;
+export const buildAction: CliAction = async (ctx, subcmd) => {
+  const { cwd, logger } = ctx;
 
-  const { config: configFile } = cmd.opts<BuildCommandOptions>();
+  const { config: configFile } = subcmd.opts<BuildCommandOptions>();
   const { config } = await resolveConfig(cwd, configFile);
-  const { main, ...viteConfig } = config;
 
   const builderConfig: InlineConfig = {
+    ...DEFAULT_CONFIG,
     root: cwd,
     mode: "production",
-    ...viteConfig,
+    ...config,
   };
-
-  setupAppInput(builderConfig);
 
   try {
     const builder = await createBuilder(builderConfig);
 
-    await createAppPayload({ main });
     await builder.buildApp();
   } catch (err) {
     logger.error(`error during build:\n${(err as Error).stack}`, err);

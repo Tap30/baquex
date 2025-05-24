@@ -1,3 +1,4 @@
+import type { Command } from "commander";
 import * as fs from "node:fs/promises";
 import colors from "yoctocolors";
 import { LIB_NAME } from "../constants.ts";
@@ -34,11 +35,12 @@ const assertCwdContainsBaquexProject = async (name: string, cwd: string) => {
 };
 
 export const runAction =
-  (name: string, action: CliAction) => async (ctx: CliContext) => {
+  (name: string, action: CliAction) =>
+  async (ctx: CliContext, subcmd: Command) => {
     await assertCwdContainsBaquexProject(name, ctx.cwd);
 
     try {
-      await action(ctx);
+      await action(ctx, subcmd);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err);

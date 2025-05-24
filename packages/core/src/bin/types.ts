@@ -14,4 +14,4 @@ export type GlobalCliOptions = {
 
 export type CliCommand = (ctx: CliContext) => Command | Promise<Command>;
 
-export type CliAction = (ctx: CliContext) => Promise<void>;
+export type CliAction = (ctx: CliContext, subcmd: Command) => Promise<void>;
