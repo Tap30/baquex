@@ -1,6 +1,6 @@
 import { createBrowserRouter, type RouteObject } from "react-router";
-import ErrorPageHandler from "../../ErrorPageHandler.tsx";
-import PageHandler from "../../PageHandler.tsx";
+import ErrorPageHandler from "../../app/ErrorPageHandler.tsx";
+import PageHandler from "../../app/PageHandler.tsx";
 import type { Router } from "../Router.ts";
 
 export const createRouter = (router: Router) => {

@@ -16,7 +16,7 @@ export class AppEngine {
   }
 
   public renderApp(): void {
-    const reactRootElement = document.getElementById("react-root");
+    const reactRootElement = document.getElementById("root");
 
     if (!reactRootElement) throw new Error("There is no `#root` element.");
 
