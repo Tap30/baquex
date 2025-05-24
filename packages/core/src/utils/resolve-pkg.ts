@@ -6,7 +6,7 @@ import { getFileMeta } from "./get-file-meta.ts";
 export const resolvePkg = async (): Promise<PackageJson> => {
   const { dirname } = getFileMeta(import.meta.url);
 
-  const packageDir = path.resolve(dirname, "..");
+  const packageDir = path.resolve(dirname, "../..");
   const pkgJsonPath = path.join(packageDir, "package.json");
 
   const pkgJsonContent = await fs.readFile(pkgJsonPath, "utf-8");

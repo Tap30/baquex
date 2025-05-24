@@ -1,4 +1,3 @@
-import { DEFAULT_CONFIG } from "../config/constants.ts";
 import { loadConfig, type LoadConfigResult } from "../config/load.ts";
 
 export const resolveConfig = async (
@@ -10,7 +9,7 @@ export const resolveConfig = async (
   if (!loadResult) {
     return {
       path: "",
-      config: DEFAULT_CONFIG,
+      config: {},
     };
   }
 
