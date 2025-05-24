@@ -10,13 +10,6 @@ export type Config = Pick<
   "root" | "plugins" | "worker" | "dev" | "define" | "resolve"
 > & {
   /**
-   * The main entrypoint of the application. Can be an absolute path, or a path relative from
-   * the location of the config file itself.
-   *
-   * By default will look for a main file in the src directory.
-   */
-  main?: string;
-  /**
    * Build specific options.
    */
   build?: Omit<BuildEnvironmentOptions, "rollupOptions"> & {

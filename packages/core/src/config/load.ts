@@ -54,14 +54,7 @@ export const loadConfig = async (
     cache: false,
     stopDir: path.dirname(cwd),
     searchStrategy: "global",
-    searchPlaces: [
-      `${MODULE_NAME}.config.js`,
-      `${MODULE_NAME}.config.cjs`,
-      `${MODULE_NAME}.config.mjs`,
-      `${MODULE_NAME}.config.ts`,
-      `${MODULE_NAME}.config.cts`,
-      `${MODULE_NAME}.config.mts`,
-    ],
+    searchPlaces: [`${MODULE_NAME}.config.js`, `${MODULE_NAME}.config.ts`],
   });
 
   const searchPath = configFilePath ?? cwd;
