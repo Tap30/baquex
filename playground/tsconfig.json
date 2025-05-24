@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@tapsioss/baquex": ["../packages/core/dist"]
+    }
+  },
+  "include": ["src", "baquex.config.ts"]
+}

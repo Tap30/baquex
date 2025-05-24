@@ -1,0 +1,14 @@
+{
+  "name": "@repo/playground",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "baquex dev",
+    "build": "baquex build",
+    "preview": "baquex preview"
+  },
+  "dependencies": {
+    "@tapsioss/baquex": "workspace:*"
+  }
+}
