@@ -5,5 +5,5 @@
       "@tapsioss/baquex": ["../packages/core/dist"]
     }
   },
-  "include": ["src", "baquex.config.ts"]
+  "include": ["src"]
 }
