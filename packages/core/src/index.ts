@@ -1,4 +1,3 @@
-export { BrowserRuntime } from "./runtimes/BrowserRuntime.ts";
 export { CookieStorage } from "./stores/browser/CookieStorage.ts";
 export { PersistedStorage } from "./stores/browser/PersistedStorage.ts";
 export { SessionStorage } from "./stores/browser/SessionStorage.ts";
