@@ -1,4 +1,10 @@
-import { type RouteObject } from "react-router";
+import {
+  type Location,
+  type NavigateFunction,
+  type RouteObject,
+  type SetURLSearchParams,
+  type useParams,
+} from "react-router";
 
 type ClientRoute = Omit<
   RouteObject,
@@ -13,7 +19,22 @@ type ClientRoute = Omit<
   | "handle"
 >;
 
-export type PageRouteHandler = () => void;
+export type PageRouteHandlerContext<
+  Data,
+  Params extends string | Record<string, string | undefined>,
+> = {
+  navigate: NavigateFunction;
+  location: Location;
+  params: ReturnType<typeof useParams<Params>>;
+  data: Data;
+  searchParams: URLSearchParams;
+  setSearchParams: SetURLSearchParams;
+};
+
+export type PageRouteHandler<
+  Data = unknown,
+  Params extends string | Record<string, string | undefined> = string,
+> = (ctx: PageRouteHandlerContext<Data, Params>) => void;
 export type PageRouteErrorHandler = () => void;
 
 export type PageRoute = Omit<
@@ -21,7 +42,7 @@ export type PageRoute = Omit<
   "children" | "element" | "errorElement" | "lazy" | "path"
 > & {
   path: string;
-  handler: PageRouteHandler;
+  handler: PageRouteHandler<unknown, string>;
   errorHandler?: PageRouteErrorHandler;
 };
 
