@@ -46,8 +46,8 @@
     "lint:ts": {
       "command": "tsc --project ./tsconfig.json",
       "files": [
-        "./tsconfig.json",
         "./tsconfig.tsbuildinfo",
+        "**/tsconfig.json",
         "**/*.{ts,tsx}",
         "!dist/**/*"
       ],
