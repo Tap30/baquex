@@ -12,3 +12,11 @@ export {
   type PageRouteErrorHandler,
   type PageRouteHandler,
 } from "./engine/Router.ts";
+
+export {
+  createPath,
+  generatePath,
+  matchPath,
+  redirect,
+  replace,
+} from "react-router";

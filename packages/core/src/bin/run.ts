@@ -11,8 +11,8 @@ const assertCwdContainsBaquexProject = async (name: string, cwd: string) => {
     // eslint-disable-next-line no-console
     console.log(
       `You need to run ${colors.yellow(
-        `strapi ${name}`,
-      )} in a Strapi project. Make sure you are in the right directory.`,
+        `baquex ${name}`,
+      )} in a Baquex project. Make sure you are in the right directory.`,
     );
 
     process.exit(1);

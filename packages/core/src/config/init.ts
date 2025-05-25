@@ -18,7 +18,7 @@ export const initConfig = async (
   cwd: string,
   defaultConfig: Config,
 ): Promise<void> => {
-  let format: "js" | "cjs" | "mjs" | "ts" | "cts" | "mts" = "js";
+  let format: "js" | "ts" = "js";
   let isESM = false;
 
   try {
