@@ -6,7 +6,11 @@
     "rootDir": "./src",
     "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo"
   },
-  "references": [{ "path": "../vtree" }],
+  "references": [
+    {
+      "path": "../vtree"
+    }
+  ],
   "include": ["src"],
   "exclude": ["**/*.test.ts", "__tests__"]
 }
