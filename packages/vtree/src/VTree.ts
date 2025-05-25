@@ -30,6 +30,13 @@ export class VTree<N extends VNode = VNode> {
   }
 
   /**
+   * Renews the tree.
+   */
+  public renew(): void {
+    this._root = new RootNode<N>(this);
+  }
+
+  /**
    * Gets the unique identifier of the virtual tree.
    */
   public get id(): string {
