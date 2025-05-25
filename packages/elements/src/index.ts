@@ -35,5 +35,9 @@ export * from "./components/input/IconButton.ts";
 // export { Pagination } from "./components/navigation/Pagination.ts";
 // export { TabGroup } from "./components/navigation/TabGroup.ts";
 
-export { BaquexElement } from "./BaquexElement.ts";
-export { runtimeManager } from "./runtime/manager.ts";
+export { BaquexElement } from "./element/BaquexElement.ts";
+export type {
+  GlobalEventMap,
+  KeyboardEventMap,
+  MouseEventMap,
+} from "./element/types.ts";

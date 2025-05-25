@@ -1,5 +1,8 @@
-import { BaquexElement, type BaquexElementKind } from "../../BaquexElement.ts";
-import type { GlobalEventMap } from "../../runtime/events.ts";
+import {
+  BaquexElement,
+  type BaquexElementKind,
+} from "../../element/BaquexElement.ts";
+import type { GlobalEventMap } from "../../element/types.ts";
 import type { ButtonProps } from "./Button.ts";
 
 export type IconButtonProps = Omit<
