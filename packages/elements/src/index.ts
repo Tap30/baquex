@@ -16,11 +16,11 @@
 // export { Card } from "./components/general/Card.ts";
 // export { Surface } from "./components/general/Surface.ts";
 
-export * from "./components/input/Button.ts";
+export * from "./components/input/Button/index.ts";
 // export { Checkbox } from "./components/input/Checkbox.ts";
 // export { DatePicker } from "./components/input/DatePicker.ts";
 // export { Form } from "./components/input/Form.ts";
-export * from "./components/input/IconButton.ts";
+export * from "./components/input/IconButton/index.ts";
 // export { RadioGroup } from "./components/input/RadioGroup.ts";
 // export { Select } from "./components/input/Select.ts";
 // export { Switch } from "./components/input/Switch.ts";
@@ -36,7 +36,14 @@ export * from "./components/input/IconButton.ts";
 // export { TabGroup } from "./components/navigation/TabGroup.ts";
 
 export { BaquexElement } from "./element/BaquexElement.ts";
+export {
+  createElementBinding,
+  type ElementBinding,
+} from "./element/create-element-binding.ts";
 export type {
+  BaquexComponent,
+  BaquexComponentProps,
+  BaquexElementKind,
   GlobalEventMap,
   KeyboardEventMap,
   MouseEventMap,

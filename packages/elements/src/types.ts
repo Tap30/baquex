@@ -3,3 +3,6 @@
 
 export type Defined<T> = Exclude<T, undefined>;
 export type AnyFunction = (...args: any[]) => any;
+export type Constructor<T> = {
+  new (...args: any[]): T;
+};
