@@ -1,20 +1,20 @@
 import { VNode } from "./VNode.ts";
 import type { VTree } from "./VTree.ts";
 
-export class RootNode<N extends VNode = VNode> extends VNode {
-  private _tree: VTree<N>;
+export class RootNode<Data = unknown> extends VNode<Data> {
+  private _tree: VTree;
 
-  constructor(tree: VTree<N>) {
-    super(null);
+  constructor(tree: VTree, data?: Data) {
+    super(data);
 
     this._tree = tree;
   }
 
-  public get tree(): VTree<N> {
+  public get tree(): VTree {
     return this._tree;
   }
 
-  public set tree(tree: VTree<N>) {
+  public set tree(tree: VTree) {
     this._tree = tree;
   }
 }

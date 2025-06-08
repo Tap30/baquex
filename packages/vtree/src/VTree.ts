@@ -1,31 +1,30 @@
 import { DoubleEndedQueue } from "@repo/utils";
 import { RootNode } from "./RootNode.ts";
-import { type VNode } from "./VNode.ts";
+import { type VNode } from "./VNode.js";
 
 /**
  * Represents a virtual tree structure.
  * A VTree manages a hierarchy of nodes, with a single root node.
  */
-export class VTree<N extends VNode = VNode> {
-  private _root: RootNode<N>;
+export class VTree {
+  private _root: RootNode;
 
   private _id: string;
 
   /**
    * Constructor for VTree.
    *
-   * @param id
-   * The unique identifier for the virtual tree.
+   * @param id The unique identifier for the virtual tree.
    */
   constructor(id: string) {
-    this._root = new RootNode<N>(this);
+    this._root = new RootNode(this);
     this._id = id;
   }
 
   /**
    * Gets the root node of the virtual tree.
    */
-  public get root(): RootNode<N> {
+  public get root(): RootNode {
     return this._root;
   }
 
@@ -33,7 +32,7 @@ export class VTree<N extends VNode = VNode> {
    * Renews the tree.
    */
   public renew(): void {
-    this._root = new RootNode<N>(this);
+    this._root = new RootNode(this);
   }
 
   /**
@@ -58,16 +57,15 @@ export class VTree<N extends VNode = VNode> {
    * - "continue":  Continue to the next node.
    * - "skip":    Skip the children of the current node.
    * - "terminate": Stop the traversal.
-   * @param config
-   * Configuration object to control the traversal.
+   * @param config Configuration object to control the traversal.
    */
   public walk(
-    visit: (node: N) => "skip" | "terminate" | "continue",
+    visit: (node: VNode) => "skip" | "terminate" | "continue",
     config: {
       /**
        * The node to start the traversal from.
        */
-      startNode?: N | RootNode<N>;
+      startNode?: VNode | RootNode;
       /**
        * The traversal mode: `"dfs"` for depth-first search,
        * or `"bfs"` for breadth-first search.
@@ -77,15 +75,15 @@ export class VTree<N extends VNode = VNode> {
   ): void {
     const { mode, startNode = this._root } = config;
 
-    const dq = new DoubleEndedQueue<N>();
-    const visited = new Set<N>();
+    const dq = new DoubleEndedQueue<VNode>();
+    const visited = new Set<VNode>();
 
     // Select the appropriate push and pop methods based on the traversal mode.
     const fns: Record<
       typeof mode,
       {
-        push: (item: N) => void;
-        pop: () => N | undefined;
+        push: (item: VNode) => void;
+        pop: () => VNode | undefined;
       }
     > = {
       // DFS: Use stack (FILO) behavior.
@@ -101,7 +99,7 @@ export class VTree<N extends VNode = VNode> {
     }
 
     // Start the traversal.
-    fns[mode].push(startNode as N);
+    fns[mode].push(startNode);
 
     while (dq.getSize() > 0) {
       // Because DQ has elements, this always yields a value.
@@ -117,7 +115,7 @@ export class VTree<N extends VNode = VNode> {
 
         for (const child of node.children) {
           // Push children onto the queue/stack for further traversal.
-          fns[mode].push(child as N);
+          fns[mode].push(child);
         }
       }
     }
@@ -126,12 +124,10 @@ export class VTree<N extends VNode = VNode> {
   /**
    * Appends a child node to the end of the specified parent node's children.
    *
-   * @param parent
-   * The parent node to append the child to.
-   * @param node
-   * The child node to append.
+   * @param parent The parent node to append the child to.
+   * @param node The child node to append.
    */
-  public appendChild(parent: N, node: N): void {
+  public appendChild(parent: VNode, node: VNode): void {
     if (!parent) {
       throw new Error("Parent node cannot be null or undefined");
     }
@@ -142,12 +138,10 @@ export class VTree<N extends VNode = VNode> {
   /**
    * Prepends a child node to the beginning of the specified parent node's children.
    *
-   * @param parent
-   * The parent node to prepend the child to.
-   * @param node
-   * The child node to prepend.
+   * @param parent The parent node to prepend the child to.
+   * @param node The child node to prepend.
    */
-  public prependChild(parent: N, node: N): void {
+  public prependChild(parent: VNode, node: VNode): void {
     if (!parent) {
       throw new Error("Parent node cannot be null or undefined");
     }
@@ -160,12 +154,10 @@ export class VTree<N extends VNode = VNode> {
    *
    * @throws {Error}
    *
-   * @param target
-   * The node after which the new node should be inserted.
-   * @param node
-   * The node to insert.
+   * @param target The node after which the new node should be inserted.
+   * @param node The node to insert.
    */
-  public insertAfter(target: N, node: N): void {
+  public insertAfter(target: VNode, node: VNode): void {
     if (!target) {
       throw new Error("Target node cannot be null or undefined.");
     }
@@ -178,12 +170,10 @@ export class VTree<N extends VNode = VNode> {
    *
    * @throws {Error}
    *
-   * @param target
-   * The node before which the new node should be inserted.
-   * @param node
-   * The node to insert.
+   * @param target The node before which the new node should be inserted.
+   * @param node The node to insert.
    */
-  public insertBefore(target: N, node: N): void {
+  public insertBefore(target: VNode, node: VNode): void {
     if (!target) {
       throw new Error("Target node cannot be null or undefined.");
     }
@@ -196,12 +186,10 @@ export class VTree<N extends VNode = VNode> {
    *
    * @throws {Error}
    *
-   * @param target
-   * The node from which the child should be deleted.
-   * @param node
-   * The node to delete.
+   * @param target The node from which the child should be deleted.
+   * @param node The node to delete.
    */
-  public deleteChild(target: N, node: N): void {
+  public deleteChild(target: VNode, node: VNode): void {
     if (!target) {
       throw new Error("Target node cannot be null or undefined.");
     }

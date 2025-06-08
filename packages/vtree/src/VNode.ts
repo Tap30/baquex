@@ -5,25 +5,27 @@ import { RootNode } from "./RootNode.ts";
  * VNodes form the building blocks of a hierarchical tree, used for
  * representing UI elements or document structures.
  */
-export class VNode {
+export class VNode<Data = unknown> {
   protected _children: VNode[] = [];
   protected _parent: VNode | null = null;
+
+  protected _data?: Data;
 
   /**
    * Constructor for VNode.
    *
-   * @param parent - The parent VNode of this node. If not provided,
+   * @param parent The parent VNode of this node. If not provided,
    * this node is assumed to be a root node (though not necessarily the
    * very top-level root, which is a RootNode).
    */
-  constructor(parent?: VNode | null) {
-    this._parent = parent ?? null;
+  constructor(data?: Data) {
+    this._data = data;
   }
 
   /**
    * Gets the child nodes of this VNode.
    */
-  public get children(): VNode[] {
+  public get children(): VNode<unknown>[] {
     return this._children;
   }
 
@@ -32,6 +34,20 @@ export class VNode {
    */
   public get parent(): VNode | null {
     return this._parent;
+  }
+
+  /**
+   * Gets the bound data.
+   */
+  public get data(): Data | undefined {
+    return this._data;
+  }
+
+  /**
+   * Sets the bound data.
+   */
+  public set data(d: Data) {
+    this._data = d;
   }
 
   /**
@@ -51,7 +67,7 @@ export class VNode {
   /**
    * Gets the siblings of this VNode (nodes that share the same parent).
    *
-   * @throws {Error} - If this node does not have a parent.
+   * @throws {Error} If this node does not have a parent.
    */
   public get siblings(): VNode[] {
     const parent = this._parent;
@@ -66,7 +82,7 @@ export class VNode {
   /**
    * Gets the siblings of this VNode that precede it.
    *
-   * @throws {Error} - If this node does not have a parent, or if the tree
+   * @throws {Error} If this node does not have a parent, or if the tree
    * structure is inconsistent
    */
   public get prevSiblings(): VNode[] {
@@ -92,7 +108,7 @@ export class VNode {
   /**
    * Gets the siblings of this VNode that follow it.
    *
-   * @throws {Error} - If this node does not have a parent, or if the tree
+   * @throws {Error} If this node does not have a parent, or if the tree
    * structure is inconsistent
    */
   public get nextSiblings(): VNode[] {
@@ -116,7 +132,7 @@ export class VNode {
   /**
    * Gets the VNode immediately preceding this node in its parent's children.
    *
-   * @throws {Error} - If this node does not have a parent, or if the tree
+   * @throws {Error} If this node does not have a parent, or if the tree
    * structure is inconsistent
    */
   public get prevSibling(): VNode | null {
@@ -144,7 +160,7 @@ export class VNode {
   /**
    * Gets the VNode immediately following this node in its parent's children.
    *
-   * @throws {Error} - If this node does not have a parent, or if the tree
+   * @throws {Error} If this node does not have a parent, or if the tree
    * structure is inconsistent
    */
   public get nextSibling(): VNode | null {
@@ -178,7 +194,7 @@ export class VNode {
    * - Second child of the root: "1-R"
    * - First child of the second child of the root: "0-1-R"
    *
-   * @throws {Error} - if the tree structure is inconsistent (e.g., a node not
+   * @throws {Error} if the tree structure is inconsistent (e.g., a node not
    * found in its parent's children).
    */
   protected get _id(): string {
@@ -224,28 +240,28 @@ export class VNode {
   /**
    * Appends a child node to the end of this node's children.
    *
-   * @param node
-   * The child node to append.
+   * @param node The child node to append.
    */
   public appendChild(node: VNode): void {
     if (!node) {
       throw new Error("Child node cannot be null or undefined");
     }
 
+    node._parent = this;
     this._children.push(node);
   }
 
   /**
    * Prepends a child node to the beginning of this node's children.
    *
-   * @param node
-   * The child node to prepend.
+   * @param node The child node to prepend.
    */
   public prependChild(node: VNode): void {
     if (!node) {
       throw new Error("Child node cannot be null or undefined");
     }
 
+    node._parent = this;
     this._children.splice(0, 0, node);
   }
 
@@ -254,8 +270,7 @@ export class VNode {
    *
    * @throws {Error}
    *
-   * @param node
-   * The node to insert.
+   * @param node The node to insert.
    */
   public insertAfter(node: VNode): void {
     if (!node) {
@@ -272,6 +287,7 @@ export class VNode {
       throw new Error("Node not found in parent's children.");
     }
 
+    node._parent = this;
     this._parent.children.splice(idx + 1, 0, node);
   }
 
@@ -280,8 +296,7 @@ export class VNode {
    *
    * @throws {Error}
    *
-   * @param node
-   * The node to insert.
+   * @param node The node to insert.
    */
   public insertBefore(node: VNode): void {
     if (!node) {
@@ -309,8 +324,7 @@ export class VNode {
    *
    * @throws {Error}
    *
-   * @param node
-   * The node to delete.
+   * @param node The node to delete.
    */
   public deleteChild(node: VNode): void {
     if (!node) {
@@ -324,5 +338,12 @@ export class VNode {
     }
 
     this._children.splice(idx, 1);
+  }
+
+  /**
+   * Removes the node from its parent.
+   */
+  public remove(): void {
+    this._parent?.deleteChild(this);
   }
 }
