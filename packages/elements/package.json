@@ -41,10 +41,17 @@
     }
   },
   "dependencies": {
+    "@preact/signals-core": "^1.8.0",
     "@tapsioss/baquex-runtime": "workspace:*",
-    "@tapsioss/baquex-vtree": "workspace:*"
+    "@tapsioss/baquex-vtree": "workspace:*",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.511.0",
+    "tailwind-merge": "^3.3.0",
+    "tw-animate-css": "^1.3.0"
   },
-  "devDependencies": {
-    "@preact/signals-core": "^1.8.0"
+  "peerDependencies": {
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
   }
 }
